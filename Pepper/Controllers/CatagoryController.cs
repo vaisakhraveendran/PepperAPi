@@ -1,19 +1,35 @@
-﻿using System;
+﻿using PepperServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using PepperModals;
 
 namespace Pepper.Controllers
 {
-    [Authorize]
-    public class ValuesController : ApiController
+   [Authorize]
+    public class CatagoryController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+
+        private readonly IProductServices _productServices;
+
+        #region Public Constructor
+
+        /// <summary>
+        /// Public constructor to initialize product service instance
+        /// </summary>
+        public CatagoryController()
         {
-            return new string[] { "value1", "value2" };
+            _productServices = new ProductServices();
+        }
+
+        #endregion
+        // GET api/values
+        public IEnumerable<ProductCatalogEntity> Get()
+        {
+          return _productServices.GetCatagoryListService();
         }
 
         // GET api/values/5
